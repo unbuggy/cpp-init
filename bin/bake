@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+#
+# NAME
+#   bake - makefile generator generator
+#
+# SYNOPSYS
+#   bake
+#
+# DESCRIPTION
+#   Builds a makefile generator, generates a makefile, calls the system `make`.
+#   where `<top>` is the root of the local Git working copy.
+
+set -e  # Exit immediately on error.
+
+cd `git rev-parse --show-toplevel`
+make -s -f etc/mkmk.mk
+cd src
+../var/libexec/mkmk `find . -name '*.?pp'` > Makefile
