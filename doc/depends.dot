@@ -1,0 +1,30 @@
+digraph depends {
+
+    subgraph cluster_l4 {
+        generator;
+    }
+
+    subgraph cluster_l3 {
+        dependency_map;
+        printer;
+    }
+
+    subgraph cluster_l2 {
+        entity;
+    }
+
+    subgraph cluster_l1 {
+        category;
+        configuration;
+        name_map;
+    }
+
+    entity -> name_map;
+    entity -> category;
+    dependency_map -> entity;
+    printer -> entity;
+    printer -> configuration;
+    generator -> configuration;
+    generator -> dependency_map;
+    generator -> printer;
+}

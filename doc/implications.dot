@@ -1,0 +1,7 @@
+digraph {
+    graph [rankdir="LR"];
+
+    corpus -> object -> folder;
+    corpus -> shared -> folder;
+
+}

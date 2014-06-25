@@ -1,0 +1,41 @@
+digraph {
+
+    commander;          // function<vector<string> (rule)>
+    configuration;      // preamble, indent-width
+    evaluator;          // function<vector<rule>, (include_map, main_set)>
+    generator;          // knows makefile syntax
+    graph;              // map<string, unordered_set<string>>
+    rule;               // target, dependencies, type
+    printer;            // renders makefiles
+    reader;             // reads sources, maps includes, identifies mains
+    category;           // enum { directory, object, shared, linked }
+
+    cluster_level4 {
+        generator;
+    }
+
+    cluster_level3 {
+        toolchain;
+    }
+
+    cluster_level2 {
+        rule;
+    }
+
+    cluster_level1 {
+        category;
+        configuration;
+    }
+
+    generator -> reader;
+    generator -> evaluator;
+    generator -> printer;
+
+    generator -> rule;
+
+    commander -> rule;
+
+    reader -> graph;
+
+    rule -> category;
+}
